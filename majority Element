@@ -1,0 +1,23 @@
+#include <bits/stdc++.h> 
+int findMajorityElement(int arr[], int n) {
+    // 2 3 3 3 8 2 9 2 2 2
+	int prev=0;
+    int cnt=0;
+    for(int i=0;i<n;i++){
+       if(cnt==0){
+           cnt=1;
+           prev=arr[i];
+                
+       }
+       else if(arr[i]!=prev)
+           cnt--;
+       else cnt++;
+       
+    }
+    int cnt1=0;
+    for(int i=0;i<n;i++){
+        if(prev==arr[i]) cnt1++;
+    }
+    if(cnt1 > n/2) return prev;
+    return -1;
+}
