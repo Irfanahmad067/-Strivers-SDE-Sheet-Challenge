@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int n=s.size();
+        int i=-1;
+        int j=-1;
+        int ans=0;
+        unordered_map<char,int>mp;
+        while(1){
+            bool f1=false;
+            bool f2=false;
+            while(i<(n-1)){
+                f1=true;
+                i++;
+                mp[s[i]]++;
+                if(mp[s[i]]==2){
+                    break;
+                }
+                else {
+                    if((i-j)>=ans) ans=i-j;
+                }
+            }
+            while(j<i){
+                f2=true;
+                j++;
+                mp[s[j]]--;
+                if(mp[s[j]]==1){
+                    if((i-j)>=ans) ans=i-j;
+                    break;
+                }
+            }
+            if(f1==false and f2==false) break;
+        }
+        return ans;
+    }
+};
