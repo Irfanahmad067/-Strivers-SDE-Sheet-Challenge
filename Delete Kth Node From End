@@ -1,0 +1,23 @@
+void removeKthNodeFromStarting(Node*head,Node*prev,int k){
+    if(k==1){
+        prev->next=head->next;
+        return;
+    }
+    removeKthNodeFromStarting(head->next,head,k-1);
+}
+int length(Node*head){
+    if(head==NULL) return 0;
+    return 1+length(head->next);
+}
+Node* removeKthNode(Node* head, int k)
+{
+     int len=length(head);
+     k=len-k+1;
+     if(k==1){
+         Node*temp=head->next;
+         head->next=NULL;
+         return temp;
+     }
+     removeKthNodeFromStarting(head,NULL,k);
+     return head;
+}
