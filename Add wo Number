@@ -1,0 +1,36 @@
+Node *addTwoNumbers(Node *head1, Node *head2)
+{
+   Node*sum=new Node(0);
+   Node*root=sum;
+    int carry=0;
+    while(head1 && head2){
+        int p=head1->data + head2->data + carry;
+        Node*temp=new Node(p%10);
+        root->next=temp;
+        root=root->next;
+        carry=p/10;
+        head1=head1->next;
+        head2=head2->next;
+    }
+    while(head1){
+        int p=head1->data + carry;
+        Node*temp=new Node(p%10);
+        root->next=temp;
+        root=root->next;
+        carry=p/10;
+        head1=head1->next;
+    }
+    while(head2){
+        int p=head2->data + carry;
+        Node*temp=new Node(p%10);
+        root->next=temp;
+        root=root->next;
+        carry=p/10;
+        head2=head2->next;
+    }
+    if(carry!=0){
+        Node*temp=new Node(carry);
+        root->next=temp;
+    }
+    return sum->next;
+}
