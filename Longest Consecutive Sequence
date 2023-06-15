@@ -1,0 +1,18 @@
+#include <bits/stdc++.h> 
+int lengthOfLongestConsecutiveSequence(vector<int> &arr, int n) {
+    unordered_map<int,int>mp;
+    int maxi=INT_MIN;
+    for(int i:arr) mp[i]++;
+    for(int i=0;i<n;i++){
+        if(mp.find(arr[i]-1)==mp.end()){
+            int len=1;
+            int p=arr[i];
+            while(mp.find(p+1)!=mp.end()){
+                len++;
+                p++;
+            }
+            maxi=max(maxi,len);
+        }
+    }
+    return maxi;
+}
