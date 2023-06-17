@@ -1,0 +1,22 @@
+Node* flattenLinkedList(Node* head) 
+{
+	if(head==NULL || head->next==NULL) return head;
+    Node*temp=flattenLinkedList(head->next);
+	head->next=NULL;
+    Node*dummy=new Node(0);
+    Node*res=dummy;
+    while(temp!=NULL && head!=NULL){
+        if(temp->data <= head->data){
+            dummy->child=temp;
+            dummy=temp;
+            temp=temp->child;
+        }else{
+            dummy->child=head;
+            dummy=head;
+            head=head->child;
+        }
+    }
+    if(temp) dummy->child=temp;
+    else if(head) dummy->child=head;
+    return res->child;
+}
