@@ -1,0 +1,19 @@
+pair<int,bool>helper(BinaryTreeNode<int>*root){
+    if(root==NULL) return {0,true};
+    pair<int,bool>left=helper(root->left);
+    pair<int,bool>right=helper(root->right);
+    int hl=left.first;
+    int hr=right.first;
+    bool l=left.second;
+    bool r=right.second;
+    pair<int,bool>p;
+    p.first=1+max(hl,hr);
+    if(abs(hl-hr) <= 1 && l==true && r==true){
+        p.second=true;
+    }
+    else p.second=false;
+    return p;
+}
+bool isBalancedBT(BinaryTreeNode<int>* root) {
+    return helper(root).second;
+}
