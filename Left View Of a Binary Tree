@@ -1,0 +1,15 @@
+void helper(TreeNode<int> *root,vector<int>&ans,int level){
+    if(root==NULL) return;
+    if(level==ans.size())
+     ans.push_back(root->data);
+    helper(root->left,ans,level+1);
+    helper(root->right,ans,level+1);
+
+    
+}
+vector<int> getLeftView(TreeNode<int> *root)
+{
+    vector<int>ans;
+    helper(root,ans,0);
+    return ans;
+}
