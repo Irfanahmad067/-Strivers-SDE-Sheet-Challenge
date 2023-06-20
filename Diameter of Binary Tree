@@ -1,0 +1,19 @@
+#include<bits/stdtr1c++.h>
+pair<int,int> helper(TreeNode<int> *root){
+    if(root==NULL) return {0,0};
+    pair<int,int>left=helper(root->left);
+    pair<int,int>right=helper(root->right);
+    int hl=left.first;
+    int hr=right.first;
+    int dl=left.second;
+    int dr=right.second;
+    pair<int,int>p;
+    p.first=1+max(hl,hr);
+    p.second=max({hl+hr,dl,dr});
+    return p;
+}
+int diameterOfBinaryTree(TreeNode<int> *root)
+{
+	return helper(root).second;
+     
+}
