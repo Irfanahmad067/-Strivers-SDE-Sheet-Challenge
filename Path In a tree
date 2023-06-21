@@ -1,0 +1,47 @@
+ vector<int>helper(TreeNode<int>*root,int x){
+	 if(root==NULL) return {};
+	 vector<int>left=helper(root->left,x);
+	 vector<int>right=helper(root->right,x);
+	 vector<int>v;
+	 if(left.size()==0 and right.size()==0 and root->data!=x){
+		 return {};
+	 }
+	 if(left.size()==0 and right.size()==0 and root->data==x){
+		 v.push_back(root->data);
+		 return v;
+	 }
+	 if(left.size()!=0 || right.size()!=0){
+		 if(left.size()!=0){
+		 left.push_back(root->data);
+		 return left;}
+		 if(right.size()!=0){
+			 right.push_back(root->data);
+			 return right;
+		 }
+
+	 }
+	 return {};
+ }
+ */
+ 
+ 
+ bool helper(TreeNode<int>*root,vector<int>&ans,int x){
+	 if(root==NULL) return false;
+	 ans.push_back(root->data);
+	 bool left=helper(root->left,ans,x);
+	 bool right=helper(root->right,ans,x);
+	 if(x==root->data) return true;
+	 if(left || right){
+	   return true;
+	 }
+	 ans.pop_back();
+	 return false;
+ }
+vector<int> pathInATree(TreeNode<int> *root, int x)
+{
+	vector<int>ans;
+    if(root==NULL) return ans;
+	helper(root,ans,x);
+	return ans;
+
+}
