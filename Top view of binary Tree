@@ -1,0 +1,22 @@
+void helper(TreeNode<int>*root,map<int,pair<int,int>>&mp,int side,int level){
+    if(root==NULL) return ;
+    helper(root->left,mp,side-1,level+1);
+    if(mp.find(side)==mp.end()){
+        mp[side]={root->val,level};
+    }
+    else{
+        if(level <= mp[side].second)
+         mp[side]={root->val,level};
+    }
+    helper(root->right,mp,side+1,level+1);
+}
+vector<int> getTopView(TreeNode<int> *root) {
+    vector<int>ans;
+    if(root==NULL) return ans;
+    map<int,pair<int,int>>mp;
+    helper(root,mp,0,0);
+    for( auto it : mp){
+        ans.push_back(it.second.first);
+    }
+    return ans;
+}
