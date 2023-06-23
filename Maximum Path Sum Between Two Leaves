@@ -1,0 +1,18 @@
+int helper(TreeNode<int>*root,int &ans,int &leaf){
+    if(root==NULL){
+        return 0;
+    }
+    int l=helper(root->left,ans,leaf);
+    int r=helper(root->right,ans,leaf);
+    if(l==0 && r==0) leaf++;
+    ans=max(ans,root->val+l+r);
+    return root->val+max(l,r);
+}
+long long int findMaxSumPath(TreeNode<int> *root)
+{   if(root==NULL) return -1;
+    int ans=0;
+    int leaf=0;
+    helper(root,ans,leaf);
+    return leaf==1 ? -1 : ans;
+    
+}
