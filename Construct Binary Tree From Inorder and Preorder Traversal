@@ -1,0 +1,20 @@
+TreeNode<int> * helper(vector<int>&inorder,int inS, int inL,vector<int>&preorder,unordered_map<int,int>&mp,int &i){
+      if(inS>inL) return NULL;
+      TreeNode<int> *root=new TreeNode<int> (preorder[i]);
+      int idx=mp[preorder[i]];
+      i++;
+      TreeNode<int> * l=helper(inorder,inS,idx-1,preorder,mp,i);
+      TreeNode<int> * r=helper(inorder,idx+1,inL,preorder,mp,i);
+      root->left=l;
+      root->right=r;
+      return root;
+
+
+}
+TreeNode<int> *buildBinaryTree(vector<int> &inorder, vector<int> &preorder)
+{
+    unordered_map<int,int>mp;
+    for(int i=0;i<inorder.size();i++) mp[inorder[i]]=i;
+    int i=0;
+	return helper(inorder,0,inorder.size()-1,preorder,mp,i);
+}
