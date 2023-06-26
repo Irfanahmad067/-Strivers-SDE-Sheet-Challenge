@@ -1,0 +1,18 @@
+#include <bits/stdc++.h> 
+TreeNode<int> * helper(vector<int>&inorder,int inS, int inL,vector<int>&postorder,int postS,int postL,unordered_map<int,int>&mp){
+      if(inS>inL || postS > postL ) return NULL;
+      TreeNode<int> *root=new TreeNode<int> (postorder[postL]);
+      int idx=mp[postorder[postL]];
+      int numsleft=idx-inS;
+      TreeNode<int> * l=helper(inorder,inS,idx-1,postorder,postS,postS+numsleft-1,mp);
+      TreeNode<int> * r=helper(inorder,idx+1,inL,postorder,postS+numsleft,postL-1,mp);
+      root->left=l;
+      root->right=r;
+      return root;
+}
+TreeNode<int>* getTreeFromPostorderAndInorder(vector<int>& postorder, vector<int>& inorder) 
+{
+	 unordered_map<int,int>mp;
+     for(int i=0;i<inorder.size();i++) mp[inorder[i]]=i;
+	return helper(inorder,0,inorder.size()-1,postorder,0,postorder.size()-1,mp);
+}
