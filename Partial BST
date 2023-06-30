@@ -1,0 +1,10 @@
+bool helper(BinaryTreeNode<int> *root,int mini,int maxi){
+    if(root==NULL) return true;
+    if(root->data < mini || root->data > maxi) return false;
+    bool l =helper(root->left,mini,root->data);
+    bool r=helper(root->right,root->data,maxi);
+    return l&&r;
+}
+bool validateBST(BinaryTreeNode<int> *root) {
+   return helper(root,INT_MIN,INT_MAX);
+}
