@@ -1,0 +1,15 @@
+void helper(int i,vector<int>&nums,vector<int>&ans,int sum){
+	if(i==nums.size()){
+		ans.push_back(sum);
+		return;
+	}
+	helper(i+1,nums,ans,sum+nums[i]);
+	helper(i+1,nums,ans,sum);
+}
+vector<int> subsetSum(vector<int> &nums){
+	vector<int>ans;
+	helper(0,nums,ans,0);
+	sort(ans.begin(),ans.end());
+	return ans;
+
+}
